@@ -5,9 +5,11 @@ body {
     background-size:cover;
     background-attachment: fixed;
     background-position: center;
-    overflow: hidden;
     padding: 0;
     margin: 0;
+}
+::-webkit-scrollbar {
+    display: none; /* Oculta la barra de desplazamiento */
 }
 
 p {
@@ -136,12 +138,10 @@ nav ul li a {
     max-height: 150px;
 }
 
-.espacio {
-    margin-top: 500px;
-}
+
 
 .open-event {
-    position: absolute;
+    position: fixed;
     background: linear-gradient(to top, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0.1));
     opacity: .8;
     width: 100%;
@@ -160,3 +160,81 @@ nav ul li a {
         display: none;
     }
 }
+
+.imglogo {
+    position:fixed; /* Fija la posición para que no se mueva al hacer scroll */
+    bottom: 20px; /* Distancia desde la parte inferior */
+    left: 94%; /* Centra el contenedor horizontalmente */
+    transform: translateX(-50%); /* Ajusta el centrado exacto */
+    display: flex; /* Para colocar los iconos en línea */
+    gap: 15px; /* Espacio entre los iconos */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos para los párrafos dentro del contenedor .cont */
+.cont p {
+    user-select: none;
+    color: #EBCACA;
+    padding: 20px;
+    text-align: left;
+    width: 20%;
+    border: 3px solid #EBCACA;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: top;
+    opacity: 0;
+    transform: translateY(150px);
+    animation: slide-up 1s ease-out forwards;
+    transition: transform 0.3s ease, filter 0.3s ease; /* Transición suave */
+}
+
+/* Efecto al pasar el cursor sobre el contenedor */
+.cont:hover p, body:hover p {
+    filter: blur(5px); /* Difumina todos los párrafos */
+    opacity: 0.5; /* Reduce su opacidad para mayor efecto */
+}
+
+/* Quita el difuminado y amplía solo el párrafo bajo el cursor */
+.cont p:hover {
+    transform: scale(1); /* Agranda el párrafo seleccionado */
+    filter: blur(0);
+    opacity: 1;
+    z-index: 1; /* Lo pone por encima de los demás */
+}
+
+/* Animación de aparición de los párrafos */
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contenedor de los logos */
+.imglogo {
+    display: flex; /* Asegura que los logos estén alineados en una fila */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para los logos dentro del contenedor */
+.imglogo a img {
+    transition: transform 0.3s ease, filter 0.2s ease; /* Transición suave */
+    width: auto; /* El ancho se ajusta automáticamente según el tamaño original de la imagen */
+    height: 50px; /* Se establece un tamaño base uniforme para todos */
+}
+
+/* Efecto al pasar el cursor sobre cada logo */
+.imglogo a:hover img {
+    transform: scale(1.5) rotate(5deg); /* Agranda el logo y lo rota ligeramente */
+    filter: brightness(5); /* Aumenta el brillo */
+    cursor: pointer; /* Cambia el cursor a puntero */
+}
+
+
+
