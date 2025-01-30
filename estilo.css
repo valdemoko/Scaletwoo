@@ -1,13 +1,55 @@
+/* Configuración para móviles */
+@media (max-width: 767px) {
+    body {
+        background-size: auto; /* No mantener el fondo fijo en pantallas pequeñas */
+        background-attachment: scroll;
+    }
+
+    .cont p {
+        width: 80%; /* Aumentamos el ancho de los párrafos en móviles */
+        padding: 10px;
+        font-size: 1rem; /* Reducir tamaño de fuente en dispositivos más pequeños */
+    }
+
+    .logo, .logoimg {
+        width: 120px; /* Hacer el logo más pequeño */
+        max-height: 120px;
+    }
+
+    nav ul li a {
+        font-size: 1rem; /* Reducir el tamaño de fuente en el menú */
+    }
+
+    /* Estilo para contenedores flexibles */
+    .cont {
+        flex-direction: column; /* Apilar los párrafos verticalmente en móviles */
+        align-items: center;
+        margin: 10px;
+    }
+
+    .imglogo {
+        bottom: 10px; /* Ajustar la posición de los logos */
+        left: 50%; /* Centrar los logos */
+        transform: translateX(-50%);
+    }
+
+    .imglogo a img {
+        height: 40px; /* Reducir el tamaño de los logos */
+    }
+}
+
+/* Estilos generales */
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-image: url(./recursos/img/fondo.png);
     background-repeat: repeat;
-    background-size:cover;
+    background-size: cover;
     background-attachment: fixed;
     background-position: center;
     padding: 0;
     margin: 0;
 }
+
 ::-webkit-scrollbar {
     display: none; /* Oculta la barra de desplazamiento */
 }
@@ -100,7 +142,6 @@ nav ul li a {
 }
 
 nav ul li a:after {
-
     content: "";
     display: block;
     height: 3px;
@@ -138,8 +179,6 @@ nav ul li a {
     max-height: 150px;
 }
 
-
-
 .open-event {
     position: fixed;
     background: linear-gradient(to top, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0.1));
@@ -162,7 +201,7 @@ nav ul li a {
 }
 
 .imglogo {
-    position:fixed; /* Fija la posición para que no se mueva al hacer scroll */
+    position: fixed; /* Fija la posición para que no se mueva al hacer scroll */
     bottom: 20px; /* Distancia desde la parte inferior */
     left: 94%; /* Centra el contenedor horizontalmente */
     transform: translateX(-50%); /* Ajusta el centrado exacto */
@@ -235,6 +274,3 @@ nav ul li a {
     filter: brightness(5); /* Aumenta el brillo */
     cursor: pointer; /* Cambia el cursor a puntero */
 }
-
-
-
