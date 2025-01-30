@@ -1,41 +1,85 @@
-/* Configuración para móviles */
-@media (max-width: 767px) {
-    body {
-        background-size: auto; /* No mantener el fondo fijo en pantallas pequeñas */
-        background-attachment: scroll;
-    }
-
-    .cont p {
-        width: 80%; /* Aumentamos el ancho de los párrafos en móviles */
-        padding: 10px;
-        font-size: 1rem; /* Reducir tamaño de fuente en dispositivos más pequeños */
-    }
-
-    .logo, .logoimg {
-        width: 120px; /* Hacer el logo más pequeño */
-        max-height: 120px;
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
     }
 
     nav ul li a {
-        font-size: 1rem; /* Reducir el tamaño de fuente en el menú */
+        font-size: 1.2rem;
+        margin-top: 30px;
     }
 
-    /* Estilo para contenedores flexibles */
-    .cont {
-        flex-direction: column; /* Apilar los párrafos verticalmente en móviles */
+    img.logo {
+        position: flex;
+        width: 100px;
+        text-align: center;
+        margin-top: 0px;
+        flex-direction: row;
+        left: 50%;
+        transform: translateX(-85%);
+        flex-direction: row;
         align-items: center;
-        margin: 10px;
+    }
+
+
+
+    div.cont {
+        display: block;
+        width: 82%;
+        align-items: center;
+        text-align: center;
+    }
+
+    div.cont p {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    p {
+        width: 80%;
+        font-size: 1rem;
+    }
+
+    div.imglogo {
+        position: relative;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row;
+        align-items: center;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        position: relative;
+        top: 10px;
+    }
+
+    .logo {
+        width: 80px;
+        max-height: 80px;
+    }
+
+    p {
+        width: 90%;
+        font-size: 0.9rem;
     }
 
     .imglogo {
-        bottom: 10px; /* Ajustar la posición de los logos */
-        left: 50%; /* Centrar los logos */
+        position: sticky;
+        bottom: 0;
+        left: 50%;
         transform: translateX(-50%);
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
     }
 
-    .imglogo a img {
-        height: 40px; /* Reducir el tamaño de los logos */
-    }
 }
 
 /* Estilos generales */
@@ -51,7 +95,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-    display: none; /* Oculta la barra de desplazamiento */
+    display: none;
+    /* Oculta la barra de desplazamiento */
 }
 
 p {
@@ -146,7 +191,7 @@ nav ul li a:after {
     display: block;
     height: 3px;
     background-color: #EBCACA;
-    transform: scale(0,1);
+    transform: scale(0, 1);
     transform-origin: left;
     transition: transform .25s;
 }
@@ -156,7 +201,7 @@ nav ul li a:hover {
 }
 
 nav ul li a:hover:after {
-    transform: scale(1,1);
+    transform: scale(1, 1);
     background-color: #929191;
 }
 
@@ -201,12 +246,18 @@ nav ul li a {
 }
 
 .imglogo {
-    position: fixed; /* Fija la posición para que no se mueva al hacer scroll */
-    bottom: 20px; /* Distancia desde la parte inferior */
-    left: 94%; /* Centra el contenedor horizontalmente */
-    transform: translateX(-50%); /* Ajusta el centrado exacto */
-    display: flex; /* Para colocar los iconos en línea */
-    gap: 15px; /* Espacio entre los iconos */
+    position: fixed;
+    /* Fija la posición para que no se mueva al hacer scroll */
+    bottom: 20px;
+    /* Distancia desde la parte inferior */
+    left: 94%;
+    /* Centra el contenedor horizontalmente */
+    transform: translateX(-50%);
+    /* Ajusta el centrado exacto */
+    display: flex;
+    /* Para colocar los iconos en línea */
+    gap: 15px;
+    /* Espacio entre los iconos */
     align-items: center;
     justify-content: center;
 }
@@ -226,21 +277,27 @@ nav ul li a {
     opacity: 0;
     transform: translateY(150px);
     animation: slide-up 1s ease-out forwards;
-    transition: transform 0.3s ease, filter 0.3s ease; /* Transición suave */
+    transition: transform 0.3s ease, filter 0.3s ease;
+    /* Transición suave */
 }
 
 /* Efecto al pasar el cursor sobre el contenedor */
-.cont:hover p, body:hover p {
-    filter: blur(5px); /* Difumina todos los párrafos */
-    opacity: 0.5; /* Reduce su opacidad para mayor efecto */
+.cont:hover p,
+body:hover p {
+    filter: blur(5px);
+    /* Difumina todos los párrafos */
+    opacity: 0.5;
+    /* Reduce su opacidad para mayor efecto */
 }
 
 /* Quita el difuminado y amplía solo el párrafo bajo el cursor */
 .cont p:hover {
-    transform: scale(1); /* Agranda el párrafo seleccionado */
+    transform: scale(1);
+    /* Agranda el párrafo seleccionado */
     filter: blur(0);
     opacity: 1;
-    z-index: 1; /* Lo pone por encima de los demás */
+    z-index: 1;
+    /* Lo pone por encima de los demás */
 }
 
 /* Animación de aparición de los párrafos */
@@ -249,6 +306,7 @@ nav ul li a {
         opacity: 0;
         transform: translateY(50px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -257,20 +315,28 @@ nav ul li a {
 
 /* Contenedor de los logos */
 .imglogo {
-    display: flex; /* Asegura que los logos estén alineados en una fila */
-    gap: 10px; /* Espacio entre los logos */
+    display: flex;
+    /* Asegura que los logos estén alineados en una fila */
+    gap: 10px;
+    /* Espacio entre los logos */
 }
 
 /* Estilos para los logos dentro del contenedor */
 .imglogo a img {
-    transition: transform 0.3s ease, filter 0.2s ease; /* Transición suave */
-    width: auto; /* El ancho se ajusta automáticamente según el tamaño original de la imagen */
-    height: 50px; /* Se establece un tamaño base uniforme para todos */
+    transition: transform 0.3s ease, filter 0.2s ease;
+    /* Transición suave */
+    width: auto;
+    /* El ancho se ajusta automáticamente según el tamaño original de la imagen */
+    height: 50px;
+    /* Se establece un tamaño base uniforme para todos */
 }
 
 /* Efecto al pasar el cursor sobre cada logo */
 .imglogo a:hover img {
-    transform: scale(1.5) rotate(5deg); /* Agranda el logo y lo rota ligeramente */
-    filter: brightness(5); /* Aumenta el brillo */
-    cursor: pointer; /* Cambia el cursor a puntero */
+    transform: scale(1.5) rotate(5deg);
+    /* Agranda el logo y lo rota ligeramente */
+    filter: brightness(5);
+    /* Aumenta el brillo */
+    cursor: pointer;
+    /* Cambia el cursor a puntero */
 }
