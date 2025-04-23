@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ★ RELLENAR: Tu Nombre -->
+    <title>Mi Portfolio - Miguel Iglesias</title>
+    <link rel="stylesheet" href="estilo.css">
+    <!-- Opcional: Puedes usar una fuente de Google Fonts como 'Inter' o 'Poppins' -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Carga el componente Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</head>
+<!-- El modo oscuro es el predeterminado, la clase 'light-mode' se añadirá/quitará con JS -->
+<body>
+
+    <header>
+        <nav class="container">
+            <!-- ★ RELLENAR: Tu Nombre o Logo -->
+            <div class="logo">Miguel Iglesias</div>
+
+            <ul>
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#about">Sobre Mí</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+            <!-- Botón de Cambio de Tema -->
+            <button id="theme-toggle" class="theme-toggle-button" aria-label="Cambiar a tema claro">
+                <!-- Ícono Luna (Modo Oscuro a Claro) - Oculto inicialmente -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" class="theme-icon-moon" style="display: none;">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69a.75.75 0 0 1 .981.981A10.503 10.503 0 0 1 12 22.5C6.201 22.5 1.5 17.799 1.5 12c0-4.243 2.582-7.878 6.159-9.528a.75.75 0 0 1 .819.162Z" clip-rule="evenodd" />
+                </svg>
+                 <!-- Ícono Sol (Modo Claro a Oscuro) - Visible inicialmente -->
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="18" height="18" class="theme-icon-sun">
+                    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707z"/>
+                 </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Sección Héroe / Inicio -->
+        <section id="hero">
+            <div class="container hero-content">
+                 <!-- Model Viewer Modificado: Centrado, más grande, rotación horizontal -->
+                 <model-viewer src="dog.glb"
+                               camera-controls
+                               disable-zoom
+                               min-camera-orbit="auto 90deg auto"
+                               max-camera-orbit="auto 90deg auto"
+                               touch-action="pan-y" 
+                               auto-rotate
+                               camera-orbit="0deg 90deg auto">
+                 </model-viewer>
+
+                <h1 class="hero-title animate-fade-in-up">Hola, soy Miguel Iglesias</h1> <!-- ★ RELLENAR: Tu Nombre -->
+                <h2 class="hero-subtitle animate-fade-in-up">Desarrollador Web Full-Stack</h2> <!-- ★ RELLENAR: Tu Rol -->
+                <p class="hero-description animate-fade-in-up">[★ RELLENAR: Una breve frase impactante sobre ti o lo que haces]</p>
+                <a href="#projects" class="btn btn-primary animate-fade-in-up">Ver Mis Proyectos</a>
+            </div>
+        </section>
+
+        <!-- Sección Sobre Mí -->
+         <section id="about" class="animate-on-scroll">
+            <div class="container">
+                <h2>Sobre Mí</h2>
+                <div class="about-content">
+                    <!-- Opcional: Puedes añadir una imagen tuya aquí -->
+                    <!-- <img src="tu-foto.jpg" alt="Foto de Miguel Iglesias" class="profile-pic"> -->
+                    <p>
+                        [★ RELLENAR: Escribe aquí una descripción sobre ti. Habla de tu pasión por tu campo,
+                        tu experiencia, qué tipo de proyectos te gustan, tus objetivos profesionales, etc.
+                        Intenta ser conciso pero informativo.]
+                    </p>
+                    <p>
+                        [★ RELLENAR (Opcional): Puedes añadir otro párrafo si necesitas más espacio para hablar de tus intereses,
+                        metodologías de trabajo o cualquier otra cosa relevante.]
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Habilidades -->
+        <section id="skills" class="animate-on-scroll">
+            <div class="container">
+                <h2>Habilidades Técnicas</h2>
+                <ul class="skills-list">
+                     <!-- ★ RELLENAR: Añade tus habilidades. -->
+                    <li>HTML5</li>
+                    <li>CSS3 (Flexbox, Grid)</li>
+                    <li>JavaScript (ES6+)</li>
+                    <li>React</li>
+                    <li>Node.js</li>
+                    <li>Express</li>
+                    <li>MongoDB</li>
+                    <li>PostgreSQL</li>
+                    <li>Git / GitHub</li>
+                    <li>Docker</li>
+                    <li>Testing (Jest, Cypress)</li>
+                    <li>[Otra Habilidad]</li>
+                    <!-- Añade más habilidades según sea necesario -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Sección Proyectos -->
+        <section id="projects" class="animate-on-scroll">
+            <div class="container">
+                <h2>Mis Proyectos</h2>
+                <div class="projects-grid">
+                    <!-- ★ RELLENAR: Añade tus proyectos. Repite esta estructura por cada proyecto -->
+                    <div class="project-card animate-on-scroll">
+                        <div class="project-image-container">
+                             <img src="img/logo.png" alt="[★ RELLENAR: Nombre del Proyecto 1]"> <!-- ★ CAMBIAR SRC y ALT -->
+                        </div>
+                        <div class="project-info">
+                            <h3>[★ RELLENAR: Nombre del Proyecto 1]</h3>
+                            <p>
+                                [★ RELLENAR: Breve descripción del proyecto 1. ¿Qué problema resuelve? ¿Qué tecnologías clave usaste? ¿Cuál fue tu rol principal o contribución destacada?]
+                            </p>
+                            <div class="project-links">
+                                <a href="https://scaletwoo.web.app/" target="_blank" class="btn btn-secondary">[★ RELLENAR: Ver Demo o Sitio]</a> <!-- ★ CAMBIAR HREF -->
+                                <a href="[★ RELLENAR: Enlace al Repositorio GitHub]" target="_blank" class="btn btn-outline">Ver Código</a> <!-- ★ CAMBIAR HREF -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card animate-on-scroll">
+                        <div class="project-image-container">
+                            <img src="placeholder.jpg" alt="[★ RELLENAR: Nombre del Proyecto 2]"> <!-- ★ CAMBIAR SRC y ALT -->
+                        </div>
+                        <div class="project-info">
+                            <h3>[★ RELLENAR: Nombre del Proyecto 2]</h3>
+                            <p>
+                                [★ RELLENAR: Breve descripción del proyecto 2. Menciona algún desafío interesante o característica única.]
+                            </p>
+                            <div class="project-links">
+                                <a href="[★ RELLENAR: Enlace Demo]" target="_blank" class="btn btn-secondary">Ver Demo</a> <!-- ★ CAMBIAR HREF -->
+                                <a href="[★ RELLENAR: Enlace Repo]" target="_blank" class="btn btn-outline">Ver Código</a> <!-- ★ CAMBIAR HREF -->
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="project-card animate-on-scroll">
+                         <div class="project-image-container">
+                             <img src="placeholder.jpg" alt="[★ RELLENAR: Nombre del Proyecto 3]"> <!-- ★ CAMBIAR SRC y ALT -->
+                        </div>
+                        <div class="project-info">
+                            <h3>[★ RELLENAR: Nombre del Proyecto 3]</h3>
+                            <p>
+                                [★ RELLENAR: Breve descripción del proyecto 3. Enfócate en los resultados o el aprendizaje obtenido.]
+                            </p>
+                            <div class="project-links">
+                                <a href="[★ RELLENAR: Enlace Demo]" target="_blank" class="btn btn-secondary">Ver Demo</a> <!-- ★ CAMBIAR HREF -->
+                                <a href="[★ RELLENAR: Enlace Repo]" target="_blank" class="btn btn-outline">Ver Código</a> <!-- ★ CAMBIAR HREF -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Añade más <div class="project-card animate-on-scroll">...</div> según necesites -->
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section id="contact" class="animate-on-scroll">
+            <div class="container">
+                <h2>Contacto</h2>
+                <p>
+                    Estoy buscando activamente nuevas oportunidades y me encantaría saber de ti.
+                    ¡Hablemos!
+                </p>
+                <ul class="contact-links">
+                     <!-- ★ RELLENAR: Tus datos de contacto -->
+                    <li>Email: <a href="mailto:[tu-email@ejemplo.com]">[tu-email@ejemplo.com]</a></li>
+                    <li>LinkedIn: <a href="[tu-perfil-linkedin]" target="_blank">[Tu Nombre en LinkedIn]</a></li>
+                    <li>GitHub: <a href="[tu-perfil-github]" target="_blank">[Tu Usuario de GitHub]</a></li>
+                    <!-- Puedes añadir otros enlaces (Portfolio adicional, Twitter, etc.) -->
+                    <!-- <li>Web: <a href="[tu-sitio-web]" target="_blank">[tu-sitio-web.com]</a></li> -->
+                </ul>
+                 <!-- Opcional: Añadir un botón de contacto directo si tienes formulario -->
+                 <!-- <a href="#formulario-contacto" class="btn btn-primary">Enviar Mensaje Directo</a> -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+             <!-- ★ RELLENAR: Tu Nombre -->
+            <p>© 2024 Miguel Iglesias. Creado con HTML, CSS y JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Asegúrate que este script exista o añade tu lógica JS aquí -->
+    <script src="script.js"></script>
+</body>
+</html>
