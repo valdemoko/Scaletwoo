@@ -27,6 +27,7 @@
     --link-hover-color: #60a5fa;
     --logo-color: #e9ecef;
     --nav-link-hover-bg: rgba(255, 255, 255, 0.05); /* Fondo hover nav */
+    --header-height: 70px; /* Definir altura del header */
 
     /* === Variables Compartidas === */
     --font-primary: 'Inter', sans-serif;
@@ -75,6 +76,8 @@ body.light-mode {
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    /* Compensar el header fijo */
+    scroll-padding-top: calc(var(--header-height) + 20px);
 }
 
 body {
@@ -83,7 +86,12 @@ body {
     color: var(--text-color);
     line-height: 1.7;
     transition: background-color var(--transition-speed) var(--transition-timing), color var(--transition-speed) var(--transition-timing);
-    overflow-x: hidden;
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Evitar scroll del body cuando el menú móvil está abierto */
+body.no-scroll {
+    overflow: hidden;
 }
 
 .container {
@@ -130,18 +138,21 @@ section {
 header {
     background-color: var(--card-bg-color);
     box-shadow: 0 2px 5px var(--shadow-color);
-    position: sticky;
+    position: sticky; /* O fixed si lo prefieres siempre visible */
     top: 0;
-    z-index: 100;
+    left: 0; /* Añadido para fixed/sticky */
+    right: 0; /* Añadido para fixed/sticky */
+    z-index: 1000; /* Asegurar que esté por encima de todo */
     width: 100%;
+    height: var(--header-height);
     transition: background-color var(--transition-speed) var(--transition-timing), box-shadow var(--transition-speed) var(--transition-timing);
 }
 
-header .container {
+header nav.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 100%; /* Ocupar toda la altura del header */
 }
 
 header .logo {
@@ -149,12 +160,30 @@ header .logo {
     font-weight: bold;
     color: var(--logo-color);
     transition: color var(--transition-speed) var(--transition-timing);
+    z-index: 1001; /* Encima del menú móvil cuando está abierto */
 }
 
-header nav ul { display: flex; align-items: center; }
-header nav ul li { margin-left: 25px; }
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre botones de tema y menú */
+    z-index: 1001; /* Encima del menú móvil */
+}
 
-header nav ul li a {
+/* Enlaces de Navegación Principal (Desktop) */
+#main-nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#main-nav-links li {
+    margin-left: 25px;
+}
+
+#main-nav-links li a {
     color: var(--text-color);
     font-weight: 400;
     padding: 5px 8px; /* Añadido padding para background hover */
@@ -167,18 +196,17 @@ header nav ul li a {
     display: inline-block; /* Para que transform funcione */
 }
 
-header nav ul li a:hover {
+#main-nav-links li a:hover {
     color: var(--link-hover-color);
     background-color: var(--nav-link-hover-bg);
     transform: scale(1.05); /* Ligero escalado en hover */
 }
 
-header nav ul li a::after { /* Subrayado animado */
+#main-nav-links li a::after { /* Subrayado animado */
     content: '';
     position: absolute;
     bottom: -2px;
     left: 8px; /* Ajustado por padding */
-    right: 8px;/* Ajustado por padding */
     width: calc(100% - 16px); /* Ajustado por padding */
     height: 2px;
     background-color: var(--link-hover-color);
@@ -188,9 +216,45 @@ header nav ul li a::after { /* Subrayado animado */
                 background-color var(--transition-speed) var(--transition-timing);
 }
 
-header nav ul li a:hover::after {
+#main-nav-links li a:hover::after {
     transform: scaleX(1); /* Expande al 100% en hover */
 }
+
+/* --- Botón de Menú Móvil (Hamburguesa) --- */
+.mobile-menu-button {
+    display: none; /* Oculto por defecto en desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0;
+    z-index: 1005; /* Asegurar que esté encima del menú desplegado */
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--heading-color);
+    margin: 5px auto;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, background-color var(--transition-speed) var(--transition-timing);
+    border-radius: 1px;
+}
+
+/* Animación Hamburguesa a X */
+.mobile-menu-button.active .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-button.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+.mobile-menu-button.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 
 /* --- Estilos del Botón de Tema --- */
 .theme-toggle-button {
@@ -198,7 +262,7 @@ header nav ul li a:hover::after {
     border: 1px solid transparent;
     cursor: pointer;
     padding: 5px;
-    margin-left: 20px;
+    /* margin-left: 20px; Se maneja con gap en .header-controls */
     color: var(--heading-color);
     display: flex;
     align-items: center;
@@ -242,13 +306,16 @@ body:not(.light-mode) .theme-icon-sun { display: block; }
 /* --- Sección Hero --- */
 #hero {
     background-color: var(--hero-bg-color);
-    min-height: calc(100vh - 70px);
+    /* Ajustar min-height para considerar el header fijo */
+    min-height: calc(100vh - var(--header-height));
+    padding-top: var(--header-height); /* Añadir padding superior para que el contenido no quede debajo del header */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     transition: background-color var(--transition-speed) var(--transition-timing);
     overflow: hidden; /* Evitar desbordamientos */
+    position: relative; /* Para asegurar contexto de apilamiento si es necesario */
 }
 .hero-content {
     text-align: center;
@@ -293,11 +360,11 @@ body:not(.light-mode) .theme-icon-sun { display: block; }
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 /* Aplicar delay a los elementos del hero */
-#hero .hero-title.animate-fade-in-up { animation-delay: 0.2s; }
-#hero .hero-subtitle.animate-fade-in-up { animation-delay: 0.4s; }
-#hero .hero-description.animate-fade-in-up { animation-delay: 0.6s; }
-#hero .btn.animate-fade-in-up { animation-delay: 0.8s; }
-/* Asegurar que el model-viewer no interfiera con delays (ya no usa esta clase) */
+#hero model-viewer { animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: 0.1s; opacity: 0; } /* Animar también el modelo */
+#hero .hero-title.animate-fade-in-up { animation-delay: 0.3s; }
+#hero .hero-subtitle.animate-fade-in-up { animation-delay: 0.5s; }
+#hero .hero-description.animate-fade-in-up { animation-delay: 0.7s; }
+#hero .btn.animate-fade-in-up { animation-delay: 0.9s; }
 
 
 /* --- Botones --- */
@@ -387,10 +454,12 @@ body:not(.light-mode) .theme-icon-sun { display: block; }
 
 /* --- Sección Sobre Mí --- */
 #about { background-color: var(--secondary-bg-color); }
-.about-content { max-width: 800px; margin: 0 auto; text-align: center; }
+.about-content { max-width: 800px; margin: 0 auto; text-align: left; } /* Cambiado a text-align: left */
 .profile-pic {
     width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
-    margin-bottom: 1.5rem; border: 5px solid var(--card-bg-color);
+    margin: 0 auto 1.5rem auto; /* Centrado */
+    display: block; /* Para centrar con margin auto */
+    border: 5px solid var(--card-bg-color);
     transition: border-color var(--transition-speed) var(--transition-timing), transform 0.3s ease-in-out, box-shadow var(--transition-speed) var(--transition-timing);
     box-shadow: 0 5px 15px var(--shadow-color);
 }
@@ -428,7 +497,10 @@ body:not(.light-mode) .theme-icon-sun { display: block; }
 #skills.is-visible .skills-list li:nth-child(10) { transition-delay: 0.55s; }
 #skills.is-visible .skills-list li:nth-child(11) { transition-delay: 0.6s; }
 #skills.is-visible .skills-list li:nth-child(12) { transition-delay: 0.65s; }
-/* Añade más nth-child si tienes más habilidades */
+#skills.is-visible .skills-list li:nth-child(13) { transition-delay: 0.7s; }
+#skills.is-visible .skills-list li:nth-child(14) { transition-delay: 0.75s; }
+#skills.is-visible .skills-list li:nth-child(15) { transition-delay: 0.8s; }
+
 
 .skills-list li:hover {
     transform: translateY(-6px) scale(1.05);
@@ -477,7 +549,7 @@ body:not(.light-mode) .theme-icon-sun { display: block; }
 .project-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Cambiado a cover */
     display: block;
     transition: transform 0.4s ease-in-out;
 }
@@ -541,54 +613,104 @@ footer p { margin-bottom: 0; font-size: 0.9rem; }
     transform: translateY(0);
 }
 
-/* Excepciones para elementos con animaciones ya definidas (como project-card, skills, contact) */
-#skills .skills-list li,
-#contact .contact-links li,
-.project-card {
-    /* Se sobreescribe la opacidad y transform inicial en sus propias reglas */
-    transition: /* Mantener las transiciones específicas de cada elemento */;
-}
-
-
 /* --- Responsividad (Media Queries) --- */
 @media (max-width: 768px) {
-    html { font-size: 15px; }
-    h1 { font-size: 2.4rem; }
+    html {
+        font-size: 15px;
+        scroll-padding-top: calc(var(--header-height) + 10px); /* Ajustar para móvil */
+    }
+    h1 { font-size: 2.2rem; } /* Reducir tamaño h1 */
     h2 { font-size: 1.8rem; margin-bottom: 2.5rem;}
     section { padding: 60px 0; }
 
-    header .container {
-        flex-direction: column;
-        height: auto;
-        padding: 15px 20px;
-        position: relative; /* Para posicionar el botón de tema */
-     }
-    header .logo { margin-bottom: 10px; }
-    header nav ul {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin-top: 10px;
+    /* --- Header/Nav Móvil --- */
+    header nav.container {
+        /* Flexbox ya está aplicado, ajustamos si es necesario */
+        position: relative; /* Para el menú desplegable */
     }
-    header nav ul li { margin: 8px 0; margin-left: 0; } /* Resetear margen izquierdo */
-    .theme-toggle-button {
+
+    .mobile-menu-button {
+        display: block; /* Mostrar botón hamburguesa */
+    }
+
+    #main-nav-links {
+        /* Estilos del menú DESPLEGADO (cuando header tiene .nav-open) */
         position: absolute;
-        top: 18px; /* Ajustar posición vertical */
-        right: 20px;
+        top: var(--header-height); /* Justo debajo del header */
+        left: 0;
+        width: 100%;
+        background-color: var(--card-bg-color);
+        box-shadow: 0 4px 6px var(--shadow-color);
+        flex-direction: column;
+        align-items: stretch; /* Que los items ocupen el ancho */
+        padding: 10px 0; /* Padding vertical */
+        margin: 0;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px); /* Empieza ligeramente arriba */
+        transition: opacity 0.3s ease-in-out,
+                    visibility 0.3s ease-in-out,
+                    transform 0.3s ease-in-out,
+                    background-color var(--transition-speed) var(--transition-timing);
+        z-index: 999; /* Debajo del header pero encima del contenido */
+    }
+
+    header.nav-open #main-nav-links {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    #main-nav-links li {
         margin-left: 0;
-        margin-top: 0; /* Resetear margen superior */
+        width: 100%;
     }
 
-    #hero { min-height: auto; padding: 60px 0; }
+    #main-nav-links li a {
+        display: block; /* Hacer que el enlace ocupe todo el li */
+        padding: 15px 20px; /* Más padding para tocar fácil */
+        text-align: center;
+        margin: 0;
+        border-radius: 0;
+        border-bottom: 1px solid var(--border-color); /* Separador sutil */
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+     #main-nav-links li:last-child a {
+        border-bottom: none; /* Quitar borde del último */
+    }
+
+    #main-nav-links li a:hover {
+        background-color: var(--nav-link-hover-bg);
+        color: var(--link-hover-color);
+        transform: none; /* Quitar escalado hover en móvil */
+    }
+    #main-nav-links li a::after {
+        display: none; /* Quitar subrayado animado en móvil */
+    }
+    /* --- Fin Header/Nav Móvil --- */
+
+
+    #hero {
+        min-height: auto; /* Altura automática en móvil */
+        padding-top: calc(var(--header-height) + 30px); /* Más espacio arriba */
+        padding-bottom: 60px;
+    }
     #hero model-viewer {
-        height: 350px;
-        max-width: 400px;
-        margin-bottom: 1.5rem; /* Ajustar margen inferior */
+        height: 300px; /* Reducir altura */
+        max-width: 350px; /* Reducir ancho máximo */
+        margin-bottom: 1.5rem;
     }
 
-    .projects-grid { grid-template-columns: 1fr; gap: 25px; } /* Una columna en tablets */
+    .projects-grid {
+        grid-template-columns: 1fr; /* Una columna */
+        gap: 25px;
+    }
     .project-card {
-        /* No necesita transform inicial aquí si #projects tiene animate-on-scroll */
+        /* La animación ya se controla por .animate-on-scroll */
+    }
+    .about-content {
+        text-align: center; /* Volver a centrar en móvil si se prefiere */
     }
 }
 
@@ -596,11 +718,11 @@ footer p { margin-bottom: 0; font-size: 0.9rem; }
      html { font-size: 14px; }
      h1 { font-size: 2rem; }
      h2 { font-size: 1.6rem; margin-bottom: 2rem; }
+     section { padding: 50px 0; }
 
      #hero model-viewer {
-        height: 300px;
-        width: 95%;
-        max-width: 320px;
+        height: 250px; /* Más pequeño */
+        max-width: 300px;
         margin-bottom: 1.5rem;
      }
      #hero p { font-size: 1rem; }
@@ -620,10 +742,5 @@ footer p { margin-bottom: 0; font-size: 0.9rem; }
 
     /* Reducir distancia de animación en móviles */
     .animate-on-scroll { transform: translateY(20px); }
-    #skills.is-visible .skills-list li,
-    #contact.is-visible .contact-links li,
-    #projects.is-visible .project-card {
-        transform: translateY(0); /* Asegura que lleguen a 0 */
-    }
-    /* El transform inicial se mantiene en las reglas base de cada elemento */
+    /* La clase .is-visible ya maneja el transform: translateY(0) */
 }
