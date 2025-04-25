@@ -4,37 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portfolio - Miguel Iglesias</title> <!-- ★ RELLENADO -->
+    <title>Mi Portfolio - Miguel Iglesias</title>
     <link rel="stylesheet" href="estilo.css">
-    <!-- Opcional: Puedes usar una fuente de Google Fonts como 'Inter' o 'Poppins' -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- Carga el componente Model Viewer -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 </head>
-<!-- El modo oscuro es el predeterminado, la clase 'light-mode' se añadirá/quitará con JS -->
 
 <body>
 
     <header>
         <nav class="container">
-            <!-- Logo -->
-            <div class="logo">Miguel Iglesias</div> <!-- ★ RELLENADO -->
-
-            <!-- Contenedor para los botones de la derecha (menú móvil y tema) -->
+            <div class="logo">Miguel Iglesias</div>
             <div class="header-controls">
-                <!-- Botón Hamburguesa (Solo visible en móvil) -->
                 <button id="mobile-menu-toggle" class="mobile-menu-button" aria-label="Abrir menú de navegación"
                     aria-expanded="false" aria-controls="main-nav-links">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                 </button>
-
-
-
-                <!-- Enlaces de Navegación (Menú principal / Menú desplegable) -->
                 <ul id="main-nav-links">
                     <li><a href="#hero">Inicio</a></li>
                     <li><a href="#about">Sobre Mí</a></li>
@@ -42,19 +31,15 @@
                     <li><a href="#projects">Proyectos</a></li>
                     <li><a href="#contact">Contacto</a></li>
                 </ul>
-
-
             </div>
-            <!-- Botón de Cambio de Tema -->
             <button id="theme-toggle" class="theme-toggle-button" aria-label="Cambiar a tema claro">
-                <!-- Ícono Luna (Modo Oscuro a Claro) -->
+                <!-- Icons remain the same -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"
                     class="theme-icon-moon" style="display: none;">
                     <path fill-rule="evenodd"
                         d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69a.75.75 0 0 1 .981.981A10.503 10.503 0 0 1 12 22.5C6.201 22.5 1.5 17.799 1.5 12c0-4.243 2.582-7.878 6.159-9.528a.75.75 0 0 1 .819.162Z"
                         clip-rule="evenodd" />
                 </svg>
-                <!-- Ícono Sol (Modo Claro a Oscuro) -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="18" height="18"
                     class="theme-icon-sun">
                     <path
@@ -68,38 +53,39 @@
         <!-- Sección Héroe / Inicio -->
         <section id="hero">
             <div class="container hero-content">
-                <!-- Model Viewer Modificado: Centrado, más grande, rotación horizontal -->
+                <!-- Model Viewer: Needs animation triggered by JS or CSS on load -->
                 <model-viewer src="brain.glb" camera-controls disable-zoom min-camera-orbit="auto 90deg auto"
-                    max-camera-orbit="auto 90deg auto" touch-action="pan-y" auto-rotate camera-orbit="0deg 90deg auto">
+                    max-camera-orbit="auto 90deg auto" touch-action="pan-y" auto-rotate camera-orbit="0deg 90deg auto"
+                    class="animate-fade-in-up" style="animation-delay: 0.1s;"> <!-- Added animation class and delay -->
                 </model-viewer>
 
-                <h1 class="hero-title animate-fade-in-up">Hola, soy Miguel Iglesias</h1> <!-- ★ RELLENADO -->
-                <h2 class="hero-subtitle animate-fade-in-up">Desarrollador Web Full-Stack</h2> <!-- ★ RELLENADO -->
-                <p class="hero-description animate-fade-in-up">Apasionado por crear soluciones web eficientes y
-                    atractivas, transformando ideas en realidad digital.</p> <!-- ★ RELLENADO -->
-                <a href="#projects" class="btn btn-primary animate-fade-in-up">Ver Mis Proyectos</a>
+                <h1 class="hero-title animate-fade-in-up" style="animation-delay: 0.3s;">Hola, soy Miguel Iglesias</h1>
+                <h2 class="hero-subtitle animate-fade-in-up" style="animation-delay: 0.5s;">Desarrollador Web Full-Stack</h2>
+                <p class="hero-description animate-fade-in-up" style="animation-delay: 0.7s;">Apasionado por crear soluciones web eficientes y atractivas, transformando ideas en realidad digital.</p>
+                <a href="#projects" class="btn btn-primary animate-fade-in-up" style="animation-delay: 0.9s;">Ver Mis Proyectos</a>
             </div>
         </section>
 
         <!-- Sección Sobre Mí -->
+        <!-- `animate-on-scroll` on section triggers JS observer -->
         <section id="about" class="animate-on-scroll">
             <div class="container">
+                <!-- Elements inside will animate when section is visible -->
                 <h2>Sobre Mí</h2>
                 <div class="about-content">
-                    <!-- Opcional: Puedes añadir una imagen tuya aquí -->
                     <!-- <img src="tu-foto.jpg" alt="Foto de Miguel Iglesias" class="profile-pic"> -->
                     <p>
                         Soy un desarrollador Full-Stack con experiencia en la creación de aplicaciones web robustas y
                         escalables. Me encanta enfrentar nuevos desafíos y aprender constantemente sobre las últimas
                         tecnologías del sector. Mi objetivo es construir productos que no solo funcionen bien, sino que
                         también ofrezcan una experiencia de usuario excepcional.
-                    </p> <!-- ★ RELLENADO -->
+                    </p>
                     <p>
                         Disfruto trabajando tanto en el frontend, dando vida a interfaces intuitivas con React y CSS
                         moderno, como en el backend, diseñando APIs eficientes con Node.js y gestionando bases de datos
                         como MongoDB y PostgreSQL. Creo firmemente en las buenas prácticas de codificación y en el
                         trabajo colaborativo.
-                    </p> <!-- ★ RELLENADO -->
+                    </p>
                 </div>
             </div>
         </section>
@@ -109,7 +95,7 @@
             <div class="container">
                 <h2>Habilidades Técnicas</h2>
                 <ul class="skills-list">
-                    <!-- ★ RELLENADO -->
+                    <!-- List items will have staggered animation via CSS -->
                     <li>HTML5</li>
                     <li>CSS</li>
                     <li>JavaScript</li>
@@ -124,7 +110,6 @@
                     <li>PHP</li>
                     <li>MySQL</li>
                     <li>XML</li>
-
                 </ul>
             </div>
         </section>
@@ -134,13 +119,13 @@
             <div class="container">
                 <h2>Mis Proyectos</h2>
                 <div class="projects-grid">
-                    <!-- ★ Proyecto 1 RELLENADO -->
-                    <div class="project-card animate-on-scroll">
+                    <!-- Project cards will have staggered animation via CSS -->
+                    <div class="project-card">
                         <div class="project-image-container">
-                            <img src="img/logo.png" alt="Logo Scaletwoo"> <!-- ★ CAMBIADO SRC y ALT -->
+                            <img src="img/logo.png" alt="Logo Scaletwoo">
                         </div>
                         <div class="project-info">
-                            <h3>Scaletwoo - Seguimiento de desarrollo</h3> <!-- ★ RELLENADO -->
+                            <h3>Scaletwoo - Seguimiento de desarrollo</h3>
                             <p>
                                 En esta página presento mis conocimientos sobre desarrollo web y creación de
                                 videojuegos, combinando ambas disciplinas en este proyecto: Scaletwoo.
@@ -149,62 +134,41 @@
                                 Aquí podrás seguir de forma detallada el desarrollo conceptual de un videojuego indie
                                 creado con Unity. Si te interesa este tema, te invito a visitar la web.
                             </p>
-                            <!-- ★ RELLENADO -->
                             <div class="project-links">
-                                <a href="https://scaletwoo.web.app/" target="_blank" class="btn btn-secondary">Visitar
-                                    Web</a> <!-- ★ CAMBIADO HREF y Texto -->
-                                <a href="https://github.com/migueligl/ScaleTwoo" target="_blank"
-                                    class="btn btn-outline">Ver Código</a> <!-- ★ CAMBIADO HREF -->
+                                <a href="https://scaletwoo.web.app/" target="_blank" class="btn btn-secondary">Visitar Web</a>
+                                <a href="https://github.com/migueligl/ScaleTwoo" target="_blank" class="btn btn-outline">Ver Código</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ★ Proyecto 2 RELLENADO -->
-                    <div class="project-card animate-on-scroll">
+                    <div class="project-card">
                         <div class="project-image-container">
                             <img src="placeholder.jpg" alt="Nombre del Proyecto 2">
-                            <!-- ★ Dejar Placeholder si no hay imagen -->
                         </div>
                         <div class="project-info">
-                            <h3>Aplicación de Tareas (To-Do App)</h3> <!-- ★ RELLENADO -->
-                            <p>
-                                Una aplicación clásica de lista de tareas con autenticación de usuarios y persistencia
-                                de datos. Desafío interesante: implementar drag-and-drop para reordenar tareas.
-                                Tecnologías: Vue.js, Firebase (Auth & Firestore), Tailwind CSS.
-                            </p> <!-- ★ RELLENADO -->
+                            <h3>Titulo del proyecto...</h3>
+                            <p>Texto...</p>
                             <div class="project-links">
-                                <a href="#" target="_blank" class="btn btn-secondary">[Enlace Demo No Disponible]</a>
-                                <!-- ★ CAMBIADO HREF -->
-                                <a href="https://github.com/tu-usuario/repo-tareas" target="_blank"
-                                    class="btn btn-outline">Ver Código</a> <!-- ★ CAMBIAR HREF -->
+                                <a href="https://scaletwoo.web.app/" target="_blank" class="btn btn-secondary">Visitar Web</a>
+                                <a href="https://github.com/migueligl/ScaleTwoo" target="_blank" class="btn btn-outline">Ver Código</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ★ Proyecto 3 RELLENADO -->
-                    <div class="project-card animate-on-scroll">
+                     <div class="project-card">
                         <div class="project-image-container">
                             <img src="placeholder.jpg" alt="Nombre del Proyecto 3">
-                            <!-- ★ Dejar Placeholder si no hay imagen -->
                         </div>
                         <div class="project-info">
-                            <h3>Portfolio Personal (Este sitio)</h3> <!-- ★ RELLENADO -->
-                            <p>
-                                Diseño y desarrollo de mi propio sitio de portfolio para mostrar mis habilidades y
-                                proyectos. Enfocado en diseño responsive, animaciones sutiles y modo claro/oscuro.
-                                Tecnologías: HTML5, CSS3 (Variables, Flexbox, Grid), JavaScript Vanilla, Model Viewer.
-                            </p> <!-- ★ RELLENADO -->
+                            <h3>Titulo del proyecto</h3>
+                            <p>Texto...</p>
                             <div class="project-links">
-                                <!-- <a href="#" target="_blank" class="btn btn-secondary">Ver Demo</a> -->
-                                <!-- Demo es el sitio actual -->
-                                <a href="https://github.com/migueligl/PortfolioMiguelIglesias" target="_blank"
-                                    class="btn btn-outline">Ver Código</a> <!-- ★ CAMBIAR HREF -->
+                                <a href="https://scaletwoo.web.app/" target="_blank" class="btn btn-secondary">Visitar Web</a>
+                                <a href="https://github.com/migueligl/ScaleTwoo" target="_blank" class="btn btn-outline">Ver Código</a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Añade más <div class="project-card animate-on-scroll">...</div> según necesites -->
-
+                    <!-- Add more cards as needed -->
                 </div>
             </div>
         </section>
@@ -213,34 +177,33 @@
         <section id="contact" class="animate-on-scroll">
             <div class="container">
                 <h2>Contacto</h2>
-                <p>
-                    
-                </p> <!-- ★ RELLENADO -->
+                
                 <ul class="contact-links">
+                    <!-- List items will have staggered animation via CSS -->
                     <li>
-                        <a href="https://github.com/migueligl" target="_blank">
+                        <a href="https://github.com/valdemoko" target="_blank" aria-label="GitHub Profile"> <!-- Added aria-label -->
                             <img src="img/github.png" alt="GitHub" />
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.instagram.com/tuusuario" target="_blank">
+                        <a href="https://www.instagram.com/mgel_16" target="_blank" aria-label="Instagram Profile"> <!-- Added aria-label -->
                             <img src="img/instagram.png" alt="Instagram" />
                         </a>
                     </li>
                     <li>
-                        <a href="https://twitter.com/tuusuario" target="_blank">
+                        <a href="https://twitter.com/mgel_16" target="_blank" aria-label="Twitter Profile"> <!-- Added aria-label -->
                             <img src="img/twitter.png" alt="Twitter" />
                         </a>
                     </li>
+                    <!-- Add more links if needed -->
                 </ul>
-                
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>© 2024 Miguel Iglesias.</p> <!-- ★ RELLENADO -->
+            <p>© 2024 Miguel Iglesias.</p>
         </div>
     </footer>
 
