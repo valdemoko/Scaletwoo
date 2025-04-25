@@ -38,33 +38,36 @@
 
 /* --- Variables para Modo Claro ("Midnight Tones") --- */
 body.light-mode {
-    --bg-color: #f0f4f8;
-    --secondary-bg-color: #e6eef8;
-    --card-bg-color: #ffffff;
-    --text-color: #34495e;
-    --heading-color: #2c3e50;
-    --border-color: #d1dce8;
-    --shadow-color: rgba(44, 62, 80, 0.1); /* Sombra más suave en claro */
-    --shadow-hover-color: rgba(44, 62, 80, 0.15);
-    --skill-bg: #ffffff;
-    --skill-border: #0d6efd;
-    --hero-bg-color: #e6eef8;
-    --contact-bg-color: #e6eef8;
-    --footer-bg-color: #2c3e50;
-    --footer-text-color: #e6eef8;
-    --btn-primary-bg: #0d6efd;
+    --bg-color: #d4d7da;
+    --secondary-bg-color: #caced4;
+    --card-bg-color: #e6e8ec;
+    --text-color: #2f343a;
+    --heading-color: #1e2227;
+    --border-color: #b2b6bc;
+    --shadow-color: rgba(30, 34, 39, 0.12);
+    --shadow-hover-color: rgba(30, 34, 39, 0.2);
+    --skill-bg: #f0f1f3;
+    --skill-border: #4a4f56;
+    --hero-bg-color: #caced4;
+    --contact-bg-color: #caced4;
+    --footer-bg-color: #1e2227;
+    --footer-text-color: #dcdfe3;
+    --btn-primary-bg: #4a4f56;
     --btn-primary-text: #ffffff;
-    --btn-secondary-bg: #34495e;
+    --btn-secondary-bg: #2f343a;
     --btn-secondary-text: #ffffff;
-    --btn-outline-text: #0d6efd;
-    --btn-outline-border: #0d6efd;
-    --btn-outline-hover-bg: #0d6efd;
+    --btn-outline-text: #4a4f56;
+    --btn-outline-border: #4a4f56;
+    --btn-outline-hover-bg: #4a4f56;
     --btn-outline-hover-text: #ffffff;
-    --link-color: #0b5ed7;
-    --link-hover-color: #0a58ca;
-    --logo-color: #2c3e50;
-    --nav-link-hover-bg: rgba(0, 0, 0, 0.05); /* Fondo hover nav */
+    --link-color: #3c4045;
+    --link-hover-color: #2f343a;
+    --logo-color: #1e2227;
+    --nav-link-hover-bg: rgba(30, 34, 39, 0.08);
 }
+
+
+
 
 /* --- Reset Básico y Estilos Globales --- */
 * {
@@ -532,7 +535,6 @@ body:not(.light-mode) .theme-icon-sun { display: block; }
 #projects.is-visible .project-card:nth-child(3) { transition-delay: 0.3s; }
 /* Add more if needed */
 
-
 .project-card:hover {
     transform: translateY(-10px) scale(1.02); /* Mayor elevación y escala sutil */
     box-shadow: 0 10px 25px var(--shadow-hover-color);
@@ -544,15 +546,19 @@ body:not(.light-mode) .theme-icon-sun { display: block; }
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
     transition: border-color var(--transition-speed) var(--transition-timing);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .project-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Cambiado a cover */
+    width: 100%; /* Reducir tamaño */
+    height: 100%; /* Reducir tamaño */
+    object-fit: contain; /* Asegura que se vea completa */
     display: block;
     transition: transform 0.4s ease-in-out;
 }
+
 
 .project-card:hover img {
     transform: scale(1.08);
@@ -743,4 +749,27 @@ footer p { margin-bottom: 0; font-size: 0.9rem; }
     /* Reducir distancia de animación en móviles */
     .animate-on-scroll { transform: translateY(20px); }
     /* La clase .is-visible ya maneja el transform: translateY(0) */
+}
+
+.contact-links {
+    
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    gap: 15px; /* Espacio entre íconos */
+    list-style: none;
+    padding: 0;
+    margin: 0 auto; /* Opcional para asegurar el centrado */
+    align-items: center;
+}
+
+.contact-links li img {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    top: 13px;
+    transition: transform 0.3s ease;
+}
+
+.contact-links li img:hover {
+    transform: scale(1.1);
 }
