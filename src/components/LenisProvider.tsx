@@ -37,38 +37,28 @@ export default function LenisProvider() {
         }
       };
 
-      try {
-        // Try importing the package if it's installed locally
-        const mod = await import("@studio-freight/lenis");
-        const Lenis = (mod && (mod as any).default) || (mod && (mod as any).Lenis) || (mod as any);
-        if (!mounted) return;
-        lenis = initLenis(Lenis);
-      } catch (err) {
-        // Fallback: load Lenis from CDN by injecting a module script that attaches to window.__Lenis
-        await new Promise<void>((resolve, reject) => {
-          const existing = (window as any).__Lenis;
-          if (existing) {
-            // already loaded
-            resolve();
-            return;
-          }
-
-          const script = document.createElement("script");
-          script.type = "module";
-          // import via ESM CDN and attach to window.__Lenis
-          script.innerHTML = `import Lenis from 'https://cdn.jsdelivr.net/npm/@studio-freight/lenis/+esm'; window.__Lenis = Lenis;`;
-          script.onload = () => resolve();
-          script.onerror = (e) => reject(e);
-          document.head.appendChild(script);
-        }).catch(() => {
-          // Can't load lenis; bail silently
+      // Load Lenis from CDN via ESM module injection to avoid bundler resolving package at build.
+      await new Promise<void>((resolve, reject) => {
+        const existing = (window as any).__Lenis;
+        if (existing) {
+          resolve();
           return;
-        });
-
-        const LenisFromWindow = (window as any).__Lenis;
-        if (LenisFromWindow) {
-          lenis = initLenis(LenisFromWindow);
         }
+
+        const script = document.createElement("script");
+        script.type = "module";
+        // use jsDelivr ESM build; attach constructor to window.__Lenis
+        script.innerHTML = `import Lenis from 'https://cdn.jsdelivr.net/npm/@studio-freight/lenis/+esm'; window.__Lenis = Lenis;`;
+        script.onload = () => resolve();
+        script.onerror = (e) => reject(e);
+        document.head.appendChild(script);
+      }).catch(() => {
+        return;
+      });
+
+      const LenisFromWindow = (window as any).__Lenis;
+      if (LenisFromWindow) {
+        lenis = initLenis(LenisFromWindow);
       }
 
       // Anchor handling: intercept same-page hash links and use lenis.scrollTo
