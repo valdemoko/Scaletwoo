@@ -156,9 +156,10 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
           {/* Animated underline bar */}
           <motion.div
             className="absolute bottom-0 h-0.5 bg-white rounded-full"
-            style={{ left: 0, width: 0 }}
-            animate={barMotion}
+            initial={{ left: 0, width: 0, opacity: 0 }}
+            animate={{ left: barMotion.left, width: barMotion.width, opacity: barMotion.opacity }}
             transition={{ type: "spring", stiffness: 380, damping: 28 }}
+            style={{ willChange: "left, width, opacity" }}
           />
         </nav>
 

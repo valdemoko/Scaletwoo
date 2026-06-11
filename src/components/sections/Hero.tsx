@@ -32,7 +32,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between pt-32 pb-12 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+    <section id="home" className="relative min-h-screen flex flex-col justify-between pt-32 pb-12 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-brand-gold-soft blur-3xl" />
         <div className="absolute right-0 top-1/3 h-96 w-96 rounded-full bg-white/5 blur-3xl" />
