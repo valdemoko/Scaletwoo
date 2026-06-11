@@ -1,7 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Syncopate } from "next/font/google";
 import "./globals.css";
+// LenisProvider: client-side smooth scroll provider
 import LenisProvider from "@/components/LenisProvider";
+import ParallaxLayers from "@/components/ParallaxLayers";
+import FogOverlay from "@/components/FogOverlay";
+import CursorLight from "@/components/CursorLight";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -71,6 +75,10 @@ export default function RootLayout({
       >
         {/* VHS / Scanline Overlay system for Found-Footage Aesthetic */}
         <LenisProvider />
+        {/* Background depth + effects */}
+        <ParallaxLayers />
+        <FogOverlay />
+        <CursorLight />
         <div className="noise-overlay" />
         <div className="scanlines" />
         <div className="cinematic-vignette" />

@@ -154,3 +154,53 @@ select {
   background: #c49200;
   color: #000000;
 }
+
+/* Parallax Layers */
+.parallax-layer {
+  will-change: transform;
+}
+.parallax-far {
+  opacity: 0.28;
+  filter: blur(2px) saturate(0.9);
+}
+.parallax-mid {
+  opacity: 0.24;
+}
+.parallax-near {
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+}
+
+/* Fog overlay animation */
+.fog-layer {
+  background: radial-gradient(circle at 30% 10%, rgba(255,255,255,0.03), transparent 20%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.02), transparent 18%);
+  opacity: 0.22;
+  filter: blur(20px);
+  transform: translateZ(0);
+}
+.fog-movement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.5' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' fill='rgba(255,255,255,0.02)'/%3E%3C/svg%3E");
+  background-size: 140% 140%;
+  opacity: 0.14;
+  animation: fogFloat 18s linear infinite;
+  mix-blend-mode: screen;
+}
+
+@keyframes fogFloat {
+  0% { transform: translate3d(-5%, -2%, 0); }
+  50% { transform: translate3d(6%, 4%, 0); }
+  100% { transform: translate3d(-5%, -2%, 0); }
+}
+
+/* Cursor light */
+.cursor-light {
+  background: radial-gradient(circle at var(--cursor-x, 50%) var(--cursor-y, 50%), rgba(255,240,200,0.06) 0%, rgba(255,200,120,0.03) 8%, transparent 28%);
+  transition: background-position 120ms linear, opacity 200ms linear;
+  pointer-events: none;
+}
+
+/* z-index helpers used by components */
+.z-0 { z-index: 0; }
+.z-5 { z-index: 5; }
+

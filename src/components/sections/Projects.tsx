@@ -31,28 +31,6 @@ export const Projects: React.FC = () => {
       image: "/WhatsApp Image 2026-05-21 at 16.19.36.jpeg",
       href: "/recovered-tape",
     },
-    {
-      id: "project-redacted-1",
-      title: "[ CENSURADO ]",
-      subtitle: "Simulador atmosférico sin anunciar",
-      desc: "Un proyecto clasificado que explora mecánicas de supervivencia y profundidad procedural en entornos aislados. Revelación detallada prevista para el cuarto trimestre de 2026.",
-      genre: "Supervivencia atmosférica / Simulación",
-      status: "Fase conceptual / Clasificado",
-      image: getPlaceholderSvg(1),
-      href: "#",
-      isClassified: true,
-    },
-    {
-      id: "project-redacted-2",
-      title: "[ CLASIFICADO ]",
-      subtitle: "Experiencia abisal sin anunciar",
-      desc: "Una experiencia de terror experimental de simulación de presión ambientada en la llanura abisal. En fase de prototipado técnico.",
-      genre: "Terror psicológico en las profundidades",
-      status: "Prototipado / Clasificado",
-      image: getPlaceholderSvg(3),
-      href: "#",
-      isClassified: true,
-    },
   ];
 
   return (
@@ -75,7 +53,7 @@ export const Projects: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
         {projects.map((project) => {
           const cardContent = (
             <motion.div
