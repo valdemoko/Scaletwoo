@@ -14,107 +14,31 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navRef = useRef<HTMLDivElement | null>(null);
-  const barRef = useRef<HTMLDivElement | null>(null);
-  const [activeKey, setActiveKey] = useState<string>("home");
-  const [barStyle, setBarStyle] = useState<{ left: number; width: number; opacity: number }>({
-    left: 0,
-    width: 0,
-    opacity: 0,
-  });
 
-  // Nav links definition
   const navLinks =
     locale === "es"
       ? [
-          { name: "Inicio", href: "/", id: "home" },
-          { name: "Proyectos", href: "/#projects", id: "projects" },
-          { name: "Nosotros", href: "/#about", id: "about" },
+          { name: "Inicio", href: "/" },
+          { name: "Proyectos", href: "/#projects" },
+          { name: "Nosotros", href: "/#about" },
         ]
       : [
-          { name: "Home", href: "/", id: "home" },
-          { name: "Projects", href: "/#projects", id: "projects" },
-          { name: "About", href: "/#about", id: "about" },
-          { name: "Vision", href: "/#vision", id: "vision" },
+          { name: "Home", href: "/" },
+          { name: "Projects", href: "/#projects" },
+          { name: "About", href: "/#about" },
+          { name: "Vision", href: "/#vision" },
         ];
 
   
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      if (window.scrollY > 20) setIsScrolled(true);
+      else setIsScrolled(false);
     };
-
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  // Observe sections to update the active nav item while scrolling
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const observed: Element[] = [];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // pick the entry with largest intersectionRatio
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-          const id = visible[0].target.id;
-          if (id) setActiveKey(id);
-        } else {
-          if (window.scrollY < 120) setActiveKey("home");
-        }
-      },
-      { root: null, rootMargin: "-40% 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
-    );
-
-    navLinks.forEach((link) => {
-      const el = document.getElementById(link.id);
-      if (el) {
-        observer.observe(el);
-        observed.push(el);
-      }
-    });
-
-    return () => {
-      observed.forEach((el) => observer.unobserve(el));
-      observer.disconnect();
-    };
-  }, [navLinks]);
-
-  // Update underline bar position when activeKey changes or on resize
-  useEffect(() => {
-    const updateBar = () => {
-      if (!navRef.current) return;
-      const anchor = document.getElementById(`nav-${activeKey}`) as HTMLElement | null;
-      const container = navRef.current as HTMLElement;
-      if (anchor && container) {
-        const aRect = anchor.getBoundingClientRect();
-        const cRect = container.getBoundingClientRect();
-        const left = Math.round(aRect.left - cRect.left);
-        const width = Math.round(aRect.width);
-        setBarStyle({ left, width, opacity: 1 });
-      } else {
-        setBarStyle((s) => ({ ...s, opacity: 0 }));
-      }
-    };
-
-    // small delay to ensure layout settled
-    const t = setTimeout(updateBar, 60);
-    window.addEventListener("resize", updateBar);
-    window.addEventListener("orientationchange", updateBar);
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("resize", updateBar);
-      window.removeEventListener("orientationchange", updateBar);
-    };
-  }, [activeKey]);
   
 
   return (
