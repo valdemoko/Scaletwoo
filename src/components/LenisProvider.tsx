@@ -5,11 +5,24 @@ import { useEffect, useRef } from "react";
 export default function LenisProvider() {
   const cleanupRef = useRef<(() => void) | null>(null);
 
+  type LenisConstructorType = new (options: {
+    duration?: number;
+    easing?: (t: number) => number;
+    smooth?: boolean;
+    smoothTouch?: boolean;
+    direction?: "vertical" | "horizontal";
+    wheelMultiplier?: number;
+  }) => {
+    raf: (time: number) => void;
+    scrollTo: (target: HTMLElement | string | number, options?: { offset?: number }) => void;
+    destroy: () => void;
+  };
+
   useEffect(() => {
     let mounted = true;
 
     (async () => {
-      let LenisConstructor: any = null;
+      let LenisConstructor: LenisConstructorType | null = null;
 
       try {
         try {
@@ -18,16 +31,17 @@ export default function LenisProvider() {
           // which can fail if the package isn't installed locally
           // (new Function prevents static analysis of import()).
           // eslint-disable-next-line no-new-func
-          LenisConstructor = (await (new Function('return import("lenis")')())).default;
-        } catch (e) {
+          LenisConstructor = (await (new Function('return import("lenis")')()))?.default ?? null;
+        } catch {
           try {
             // try the older package name the same way
             // eslint-disable-next-line no-new-func
-            LenisConstructor = (await (new Function('return import("@studio-freight/lenis")')())).default;
-          } catch (_){
+            LenisConstructor = (await (new Function('return import("@studio-freight/lenis")')()))?.default ?? null;
+          } catch {
             // fallback to CDN ESM injection
             await new Promise<void>((resolve, reject) => {
-              if ((window as any).__Lenis) {
+              const win = window as unknown as { __Lenis?: LenisConstructorType };
+              if (win.__Lenis) {
                 resolve();
                 return;
               }
@@ -35,11 +49,12 @@ export default function LenisProvider() {
               script.type = "module";
               script.innerHTML = `import Lenis from 'https://cdn.jsdelivr.net/npm/@studio-freight/lenis/+esm'; window.__Lenis = Lenis;`;
               script.onload = () => resolve();
-              script.onerror = (e) => reject(e);
+              script.onerror = () => reject();
               document.head.appendChild(script);
             }).catch(() => {});
 
-            LenisConstructor = (window as any).__Lenis;
+            const win = window as unknown as { __Lenis?: LenisConstructorType };
+            LenisConstructor = win.__Lenis ?? null;
           }
         }
 

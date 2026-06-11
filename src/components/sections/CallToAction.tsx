@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "../ui/button";
 
 export const CallToAction: React.FC = () => {
   return (
@@ -30,7 +29,7 @@ export const CallToAction: React.FC = () => {
 
           <div className="lg:col-span-5 flex items-center justify-center">
             <div className="text-sm text-brand-textMuted max-w-sm text-center">
-              Hemos eliminado los enlaces directos de esta sección. Consulta el proyecto desde el menú "Proyectos" o visita la página del proyecto desde la navegación principal.
+              Hemos eliminado los enlaces directos de esta sección. Consulta el proyecto desde el menú &quot;Proyectos&quot; o visita la página del proyecto desde la navegación principal.
             </div>
           </div>
         </div>

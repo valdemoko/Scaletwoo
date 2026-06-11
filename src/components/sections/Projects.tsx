@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { getPlaceholderSvg } from "../ui/gallery";
 
 interface Project {
   id: string;

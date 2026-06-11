@@ -32,7 +32,7 @@ export default function ParallaxLayers() {
         const w = window.innerWidth;
         const h = window.innerHeight;
 
-        layers.forEach((layer, i) => {
+        layers.forEach((layer) => {
           const el = c.querySelector<HTMLDivElement>(`#parallax-${layer.id}`);
           if (!el) return;
           const depth = layer.speed;
@@ -46,11 +46,12 @@ export default function ParallaxLayers() {
     };
 
     stateRef.current.raf = requestAnimationFrame(tick);
+    const rafHandle = stateRef.current.raf;
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("pointermove", onPointer);
-      cancelAnimationFrame(stateRef.current.raf);
+      cancelAnimationFrame(rafHandle);
     };
   }, []);
 

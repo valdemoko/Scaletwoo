@@ -10,11 +10,9 @@ export const DustParticles: React.FC = () => {
   const meshRef = useRef<THREE.Points>(null);
 
   // Generate particle positions and velocities
-  const [positions, velocities, sizes, alphas] = useMemo(() => {
+  const [positions, velocities] = useMemo(() => {
     const pos = new Float32Array(count * 3);
     const vel = new Float32Array(count * 3);
-    const s = new Float32Array(count);
-    const a = new Float32Array(count);
 
     for (let i = 0; i < count; i++) {
       // Spread particles in a 3D box: X [-20,20], Y [-12,12], Z [-40,-2]
@@ -27,14 +25,11 @@ export const DustParticles: React.FC = () => {
       vel[i * 3 + 1] = Math.random() * 0.02 + 0.004; // upward drift
       vel[i * 3 + 2] = (Math.random() - 0.5) * 0.008;
 
-      // Per-particle size (used later via a simple heuristic)
-      s[i] = 0.06 + Math.random() * 0.22; // 0.06 - 0.28
-
-      // Per-particle base alpha
-      a[i] = 0.25 + Math.random() * 0.6; // 0.25 - 0.85
+      // Per-particle size variance placeholder for future tuning
+      // and alpha variability is handled in the material.
     }
 
-    return [pos, vel, s, a];
+    return [pos, vel];
   }, []);
 
   // Create a soft circular texture for particles
