@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -14,6 +14,13 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navRef = useRef<HTMLDivElement | null>(null);
+  const [activeKey, setActiveKey] = useState<string>(pathname === "/" ? "home" : "home");
+  const [barMotion, setBarMotion] = useState<{ left: number; width: number; opacity: number }>({
+    left: 0,
+    width: 0,
+    opacity: 0,
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +36,64 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // Observe sections to update the active nav item while scrolling
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const sectionIds = navLinks.map((l) => (l.href === "/" ? "home" : l.href.replace("/#", "")));
+    const observed: Element[] = [];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length > 0) {
+          visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          const id = visible[0].target.id;
+          setActiveKey(id || "home");
+        } else {
+          // if nothing intersecting, fallback to top/home when near top
+          if (window.scrollY < 120) setActiveKey("home");
+        }
+      },
+      { root: null, rootMargin: "-40% 0px -40% 0px", threshold: [0.5] }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        observer.observe(el);
+        observed.push(el);
+      }
+    });
+
+    return () => {
+      observed.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
+    };
+  }, [navLinks]);
+
+  // Update underline bar position when activeKey changes or on resize
+  useEffect(() => {
+    const updateBar = () => {
+      if (!navRef.current) return;
+      const anchor = document.getElementById(`nav-${activeKey}`) as HTMLElement | null;
+      const container = navRef.current as HTMLElement;
+      if (anchor && container) {
+        const aRect = anchor.getBoundingClientRect();
+        const cRect = container.getBoundingClientRect();
+        const left = Math.round(aRect.left - cRect.left);
+        const width = Math.round(aRect.width);
+        setBarMotion({ left, width, opacity: 1 });
+      } else {
+        setBarMotion((s) => ({ ...s, opacity: 0 }));
+      }
+    };
+
+    updateBar();
+    window.addEventListener("resize", updateBar);
+    return () => window.removeEventListener("resize", updateBar);
+  }, [activeKey, navRef]);
 
   const navLinks =
     locale === "es"
@@ -65,33 +130,35 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8 lg:space-x-12">
+        <nav ref={navRef} className="hidden md:flex items-center space-x-8 lg:space-x-12 relative">
           {navLinks.map((link) => {
             const isActive =
               (link.href === "/" && pathname === "/") ||
               (link.href.startsWith("/#") && pathname === "/");
 
+            const keyName = link.href === "/" ? "home" : link.href.replace("/#", "");
+
             return (
               <Link
                 key={link.name}
                 href={link.href}
+                id={`nav-${keyName}`}
                 className={`relative text-[11px] md:text-xs font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
                   isActive ? "text-white" : "text-white/75 hover:text-white"
                 }`}
               >
                 {link.name}
-                {/* Active indicator dot, matching mockup image */}
-                {isActive && (
-                  <motion.span
-                    layoutId="activeDot"
-                    className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-white rounded-full"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
               </Link>
             );
           })}
-          
+
+          {/* Animated underline bar */}
+          <motion.div
+            className="absolute bottom-0 h-0.5 bg-white rounded-full"
+            style={{ left: 0, width: 0 }}
+            animate={barMotion}
+            transition={{ type: "spring", stiffness: 380, damping: 28 }}
+          />
         </nav>
 
         {/* Mobile Menu Button */}
