@@ -5,6 +5,12 @@
 :root {
   --background: #050505;
   --foreground: #ffffff;
+  --brand-gold: #c49200;
+  --brand-gold-soft: rgba(196, 146, 0, 0.18);
+  --brand-card: rgba(10, 10, 12, 0.75);
+  --brand-textMuted: rgba(255, 255, 255, 0.62);
+  --brand-border: rgba(255, 255, 255, 0.08);
+  --brand-surface: rgba(12, 12, 15, 0.9);
 }
 
 html {
@@ -20,7 +26,9 @@ html {
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: radial-gradient(circle at 20% 10%, rgba(196, 146, 0, 0.08), transparent 20%),
+    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.04), transparent 18%),
+    linear-gradient(180deg, #070707 0%, #020202 100%);
   font-family: var(--font-outfit), sans-serif;
   min-height: 100vh;
   width: 100%;
@@ -105,7 +113,7 @@ select {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(196, 146, 0, 0.8);
+  -webkit-text-stroke: 1px var(--brand-gold);
   font-weight: 900;
 }
 

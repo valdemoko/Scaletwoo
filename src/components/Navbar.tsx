@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Button } from "./ui/button";
 
 interface NavbarProps {
   locale?: "en" | "es";
@@ -37,14 +36,14 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
           { name: "Inicio", href: "/" },
           { name: "Proyectos", href: "/#projects" },
           { name: "Nosotros", href: "/#about" },
+          // Visión link removed
         ]
       : [
           { name: "Home", href: "/" },
           { name: "Projects", href: "/#projects" },
           { name: "About", href: "/#about" },
+          { name: "Vision", href: "/#vision" },
         ];
-
-  const contactLabel = locale === "es" ? "Contacto" : "Contact";
 
   return (
     <header
@@ -93,9 +92,6 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
             );
           })}
           
-          <Button href="/#contact" variant="outline" className="!px-6 !py-2">
-            {contactLabel}
-          </Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -126,14 +122,6 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
               {link.name}
             </Link>
           ))}
-          <Button
-            href="/#contact"
-            variant="outline"
-            className="!w-full !px-6 !py-2.5"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            {contactLabel}
-          </Button>
         </motion.div>
       )}
     </header>

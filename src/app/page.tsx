@@ -5,8 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
-import { Vision } from "@/components/sections/Vision";
-import { Contact } from "@/components/sections/Contact";
+// Vision and CallToAction removed per update
 import { Footer } from "@/components/Footer";
 import BackgroundCanvasClient from "@/components/canvas/BackgroundCanvasClient";
 
@@ -30,11 +29,7 @@ export default function Home() {
         {/* Featured Projects portfolio */}
         <Projects />
 
-        {/* Core Values & Tech vision */}
-        <Vision />
-
-        {/* Contact form */}
-        <Contact />
+        {/* Vision and CallToAction sections removed */}
       </main>
 
       {/* Global Footer */}

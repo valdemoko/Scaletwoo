@@ -15,6 +15,7 @@ const config: Config = {
           bg: "#050505",
           card: "#0b0b0b",
           gold: "#c49200",
+          goldSoft: "rgba(196, 146, 0, 0.18)",
           goldLight: "#ffbe00",
           textMuted: "#8a8a8a",
           border: "#18181b",

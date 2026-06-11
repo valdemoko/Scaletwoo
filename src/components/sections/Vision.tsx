@@ -20,7 +20,7 @@ export const Vision: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 px-6 md:px-12 bg-black/40 border-y border-white/5 relative z-10">
+    <section id="vision" className="py-24 md:py-32 px-6 md:px-12 bg-black/40 border-y border-white/5 relative z-10">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,8 +46,8 @@ export const Vision: React.FC = () => {
           </div>
 
           <div className="lg:col-span-7 flex flex-col justify-center space-y-12">
-            {values.map((val, idx) => (
-              <div key={idx} className="relative border-l border-white/10 pl-8 group">
+            {values.map((val) => (
+              <div key={val.title} className="relative border-l border-white/10 pl-8 group">
                 <div className="absolute top-1 -left-[4px] w-2 h-2 rounded-full bg-white/20 group-hover:bg-brand-gold transition-colors duration-300" />
                 
                 <h3 className="font-display text-sm font-bold tracking-widest text-white mb-2 uppercase group-hover:text-brand-gold transition-colors duration-300">
@@ -58,6 +58,8 @@ export const Vision: React.FC = () => {
                 </p>
               </div>
             ))}
+
+            {/* TikTok link moved to Footer for consistent placement */}
           </div>
         </motion.div>
       </div>
