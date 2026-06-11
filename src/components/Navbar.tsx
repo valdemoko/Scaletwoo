@@ -15,12 +15,28 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement | null>(null);
-  const [activeKey, setActiveKey] = useState<string>(pathname === "/" ? "home" : "home");
-  const [barMotion, setBarMotion] = useState<{ left: number; width: number; opacity: number }>({
+  const barRef = useRef<HTMLDivElement | null>(null);
+  const [activeKey, setActiveKey] = useState<string>("home");
+  const [barStyle, setBarStyle] = useState<{ left: number; width: number; opacity: number }>({
     left: 0,
     width: 0,
     opacity: 0,
   });
+
+  // Nav links definition
+  const navLinks =
+    locale === "es"
+      ? [
+          { name: "Inicio", href: "/", id: "home" },
+          { name: "Proyectos", href: "/#projects", id: "projects" },
+          { name: "Nosotros", href: "/#about", id: "about" },
+        ]
+      : [
+          { name: "Home", href: "/", id: "home" },
+          { name: "Projects", href: "/#projects", id: "projects" },
+          { name: "About", href: "/#about", id: "about" },
+          { name: "Vision", href: "/#vision", id: "vision" },
+        ];
 
   const navLinks =
     locale === "es"
@@ -51,31 +67,28 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
   // Observe sections to update the active nav item while scrolling
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const sectionIds = navLinks.map((l) => (l.href === "/" ? "home" : l.href.replace("/#", "")));
     const observed: Element[] = [];
-
     const observer = new IntersectionObserver(
       (entries) => {
+        // pick the entry with largest intersectionRatio
         const visible = entries.filter((e) => e.isIntersecting);
         if (visible.length > 0) {
           visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
           const id = visible[0].target.id;
-          setActiveKey(id || "home");
+          if (id) setActiveKey(id);
         } else {
-          // if nothing intersecting, fallback to top/home when near top
           if (window.scrollY < 120) setActiveKey("home");
         }
       },
-      { root: null, rootMargin: "-40% 0px -40% 0px", threshold: [0.5] }
+      { root: null, rootMargin: "-40% 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
+    navLinks.forEach((link) => {
+      const el = document.getElementById(link.id);
       if (el) {
         observer.observe(el);
         observed.push(el);
@@ -99,16 +112,22 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
         const cRect = container.getBoundingClientRect();
         const left = Math.round(aRect.left - cRect.left);
         const width = Math.round(aRect.width);
-        setBarMotion({ left, width, opacity: 1 });
+        setBarStyle({ left, width, opacity: 1 });
       } else {
-        setBarMotion((s) => ({ ...s, opacity: 0 }));
+        setBarStyle((s) => ({ ...s, opacity: 0 }));
       }
     };
 
-    updateBar();
+    // small delay to ensure layout settled
+    const t = setTimeout(updateBar, 60);
     window.addEventListener("resize", updateBar);
-    return () => window.removeEventListener("resize", updateBar);
-  }, [activeKey, navRef]);
+    window.addEventListener("orientationchange", updateBar);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("resize", updateBar);
+      window.removeEventListener("orientationchange", updateBar);
+    };
+  }, [activeKey]);
   
 
   return (
@@ -154,13 +173,14 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
           })}
 
           {/* Animated underline bar */}
-          <motion.div
-            className="absolute bottom-0 h-0.5 bg-white rounded-full"
-            initial={{ left: 0, width: 0, opacity: 0 }}
-            animate={{ left: barMotion.left, width: barMotion.width, opacity: barMotion.opacity }}
-            transition={{ type: "spring", stiffness: 380, damping: 28 }}
-            style={{ willChange: "left, width, opacity" }}
-          />
+            <motion.div
+              ref={barRef}
+              className="absolute bottom-0 h-0.5 bg-white rounded-full"
+              initial={{ left: 0, width: 0, opacity: 0 }}
+              animate={{ left: barStyle.left, width: barStyle.width, opacity: barStyle.opacity }}
+              transition={{ type: "spring", stiffness: 380, damping: 28 }}
+              style={{ willChange: "left, width, opacity" }}
+            />
         </nav>
 
         {/* Mobile Menu Button */}
