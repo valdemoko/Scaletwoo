@@ -61,7 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav ref={navRef} className="hidden md:flex items-center space-x-8 lg:space-x-12 relative">
+        <nav className="hidden md:flex items-center space-x-8 lg:space-x-12 relative">
           {navLinks.map((link) => {
             const isActive =
               (link.href === "/" && pathname === "/") ||
@@ -83,15 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
             );
           })}
 
-          {/* Animated underline bar */}
-            <motion.div
-              ref={barRef}
-              className="absolute bottom-0 h-0.5 bg-white rounded-full"
-              initial={{ left: 0, width: 0, opacity: 0 }}
-              animate={{ left: barStyle.left, width: barStyle.width, opacity: barStyle.opacity }}
-              transition={{ type: "spring", stiffness: 380, damping: 28 }}
-              style={{ willChange: "left, width, opacity" }}
-            />
+          {/* underline removed */}
         </nav>
 
         {/* Mobile Menu Button */}
