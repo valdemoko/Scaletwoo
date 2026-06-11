@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Syncopate } from "next/font/google";
 import "./globals.css";
+import LenisProvider from "@/components/LenisProvider";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -69,6 +70,7 @@ export default function RootLayout({
         className={`${outfit.variable} ${syncopate.variable} font-sans bg-brand-bg text-white antialiased selection:bg-brand-gold selection:text-black`}
       >
         {/* VHS / Scanline Overlay system for Found-Footage Aesthetic */}
+        <LenisProvider />
         <div className="noise-overlay" />
         <div className="scanlines" />
         <div className="cinematic-vignette" />
