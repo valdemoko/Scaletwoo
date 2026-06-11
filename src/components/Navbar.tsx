@@ -38,20 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
           { name: "Vision", href: "/#vision", id: "vision" },
         ];
 
-  const navLinks =
-    locale === "es"
-      ? [
-          { name: "Inicio", href: "/" },
-          { name: "Proyectos", href: "/#projects" },
-          { name: "Nosotros", href: "/#about" },
-          // Visión link removed
-        ]
-      : [
-          { name: "Home", href: "/" },
-          { name: "Projects", href: "/#projects" },
-          { name: "About", href: "/#about" },
-          { name: "Vision", href: "/#vision" },
-        ];
+  
 
   useEffect(() => {
     const handleScroll = () => {
