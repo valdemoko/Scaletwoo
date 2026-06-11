@@ -22,6 +22,21 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
     opacity: 0,
   });
 
+  const navLinks =
+    locale === "es"
+      ? [
+          { name: "Inicio", href: "/" },
+          { name: "Proyectos", href: "/#projects" },
+          { name: "Nosotros", href: "/#about" },
+          // Visión link removed
+        ]
+      : [
+          { name: "Home", href: "/" },
+          { name: "Projects", href: "/#projects" },
+          { name: "About", href: "/#about" },
+          { name: "Vision", href: "/#vision" },
+        ];
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -94,21 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({ locale = "en" }) => {
     window.addEventListener("resize", updateBar);
     return () => window.removeEventListener("resize", updateBar);
   }, [activeKey, navRef]);
-
-  const navLinks =
-    locale === "es"
-      ? [
-          { name: "Inicio", href: "/" },
-          { name: "Proyectos", href: "/#projects" },
-          { name: "Nosotros", href: "/#about" },
-          // Visión link removed
-        ]
-      : [
-          { name: "Home", href: "/" },
-          { name: "Projects", href: "/#projects" },
-          { name: "About", href: "/#about" },
-          { name: "Vision", href: "/#vision" },
-        ];
+  
 
   return (
     <header
