@@ -58,7 +58,7 @@ export default function RecoveredTapePage() {
     {
       id: "faq-1",
       title: "¿Cuál es la fecha de lanzamiento de Recovered Tape?",
-      content: "Recovered Tape está actualmente en desarrollo activo. Nuestro objetivo es una fase de pruebas cerradas en el cuarto trimestre de 2026, seguida de un lanzamiento público en Steam a principios de 2027. Puedes añadir el juego a tu lista de deseos en Steam para recibir actualizaciones inmediatas sobre las solicitudes de prueba.",
+      content: "Recovered Tape está actualmente en desarrollo activo. Nuestro objetivo es una fase de pruebas cerradas en el cuarto trimestre de 2026, seguida de un lanzamiento público en Steam a principios de 2027. La ficha de Steam y la lista de deseos estarán disponibles próximamente.",
     },
     {
       id: "faq-2",

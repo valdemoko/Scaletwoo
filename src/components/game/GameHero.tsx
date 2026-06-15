@@ -20,7 +20,7 @@ export const GameHero: React.FC = () => {
       >
         <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
         <span className="text-[10px] md:text-xs font-semibold tracking-[0.45em] text-brand-gold uppercase">
-          Ya en lista de deseos en Steam
+          Próximamente en la lista de deseos de Steam
         </span>
       </motion.div>
 
@@ -57,7 +57,7 @@ export const GameHero: React.FC = () => {
           variant="gold"
           className="w-full sm:w-auto flex items-center justify-center space-x-2 shadow-lg shadow-brand-gold/10"
         >
-          <span>Añadir a lista de deseos</span>
+          <span>Lista de deseos próximamente</span>
           <Sparkles size={14} className="ml-1" />
         </Button>
         <Button

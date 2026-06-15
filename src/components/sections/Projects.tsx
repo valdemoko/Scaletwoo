@@ -26,7 +26,7 @@ export const Projects: React.FC = () => {
       subtitle: "Terror VHS hiperrealista de los Backrooms",
       desc: "Sumérgete en un juego de terror psicológico found-footage. Explora el laberinto infinito de paredes amarillas de los Backrooms, grabando cada detalle en una cinta VHS en bruto.",
       genre: "Terror psicológico / Found footage",
-      status: "En desarrollo / Lista de deseos",
+      status: "En desarrollo / Próximamente en Steam",
       image: "/WhatsApp Image 2026-05-21 at 16.19.36.jpeg",
       href: "/recovered-tape",
     },

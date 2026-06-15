@@ -32,18 +32,17 @@ export const GameSteam: React.FC = () => {
           </h2>
           
           <p className="text-brand-textMuted text-sm md:text-base leading-relaxed font-light tracking-wide max-w-xl mx-auto mb-10">
-            Apoya a desarrolladores independientes. Añadir Recovered Tape a tu lista de deseos de Steam aumenta nuestra visibilidad en la plataforma, nos ayuda a desbloquear funciones comunitarias y te avisa en el momento exacto en que comience la pesadilla.
+            Recovered Tape estará disponible próximamente en Steam. Cuando publiquemos la ficha del juego, podrás añadirlo a tu lista de deseos para recibir avisos del lanzamiento y las pruebas cerradas.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
             {/* Wishlist Button */}
             <Button
-              href="https://store.steampowered.com"
               variant="gold"
-              className="w-full sm:w-auto flex items-center justify-center space-x-2 shadow-lg shadow-brand-gold/20 !px-10 !py-4"
+              className="w-full sm:w-auto flex items-center justify-center space-x-2 shadow-lg shadow-brand-gold/20 !px-10 !py-4 opacity-80 cursor-default"
               id="steam-wishlist-btn"
             >
-              <span>Añadir a lista de deseos</span>
+              <span>Lista de deseos próximamente</span>
               <Sparkles size={14} fill="currentColor" />
             </Button>
             

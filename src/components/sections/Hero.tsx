@@ -109,7 +109,7 @@ export const Hero: React.FC = () => {
             },
             {
               title: "Pendiente",
-              desc: "Lista de deseos en Steam abierta para quienes buscan novedades exclusivas.",
+              desc: "Próximamente en la lista de deseos de Steam para quienes buscan novedades exclusivas.",
             },
           ].map((stat, index) => (
             <div key={index} className={`${index > 0 ? "pt-6 md:pt-0 lg:pl-6" : ""}`}>

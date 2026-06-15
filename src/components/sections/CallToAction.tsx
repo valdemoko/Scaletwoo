@@ -23,7 +23,7 @@ export const CallToAction: React.FC = () => {
               Diseñando experiencias oscuras que se quedan contigo.
             </h2>
             <p className="text-brand-textMuted max-w-2xl text-base leading-relaxed font-light tracking-wide">
-              Si buscas un proyecto con identidad fuerte, atmósfera inmersiva y calidad técnica, has llegado al lugar correcto. Explora el avance de Recovered Tape, descarga material de prensa o anota la fecha de salida en tu lista de deseos.
+              Si buscas un proyecto con identidad fuerte, atmósfera inmersiva y calidad técnica, has llegado al lugar correcto. Explora el avance de Recovered Tape, descarga material de prensa y estate atento: próximamente estará en la lista de deseos de Steam.
             </p>
           </div>
 
